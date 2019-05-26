@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Display</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style>
+		*{
+			margin:0px;
+			padding: 0px;
+		}
+			body{
+				background-image: linear-gradient(to right,#8A2BE2,#ff5722);
+				margin-top : 50px !important;
+			}
+			#button{
+				border-radius: 1.5rem;
+				border:none;
+				width : 120px;
+				background: #ff9800;
+				font-weight:600;
+				color: #555;
+				margin-top: 50px;
+				margin-left: 500px;
+				padding : 10px; 
+			}
+			#button:hover{
+				background: #000;
+			}
+			#text1{
+                 color:red;
+			}
+			#text2{
+				 color:yellow;
+			}
+			#text3{
+				 color:blue;
+			}
+			#text4{
+				color:green;
+			}
+			@media only screen and (max-width: 768px){
+				body{
+					overflow-x: hidden;
+				}
+				#button{
+					margin-left: 100px;
+					margin-top:10px;
+				}
+    </style>
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar navbar-default">
+		<h1 align="center">INFORMATION</h1>
+	</nav>
+		<ul class="list-group">
+			<label>Name</label>
+			<li class="list-group-item" id="text1"></li>
+			<br>
+			<label>Gender</label>
+			<li class="list-group-item" id="text2"></li>
+			<br>
+			<label>Titles</label>
+			<li class="list-group-item" id="text3"></li>
+			<br>
+			<label>Played-By</label>
+			<li class="list-group-item" id="text4"></li>
+		</ul>
+		<br>
+	    <br>
+		<button id="button">Display</button>
+	</div>
+	<script>
+		document.getElementById('button').addEventListener('click',loadtext);
+		function loadtext(){
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET','https://anapioficeandfire.com/api/characters/583',true);
+			xhr.onload = function(){
+				if(this.status==200){
+					var s = JSON.parse(this.responseText);
+					document.getElementById('text1').innerHTML=s.name;
+					document.getElementById('text2').innerHTML=s.gender;
+					document.getElementById('text3').innerHTML=s.titles;
+					document.getElementById('text4').innerHTML=s.playedBy;
+				}
+			}
+			xhr.send();
+		}
+	</script>
+</body>
+</html>
